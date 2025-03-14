@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawsome Awards - Vote for the Best Dogs</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">Pawsome<span>Awards</span></a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="active">Nominees</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Past Winners</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-secondary">Login</button>
+                <button class="btn btn-primary">Vote Now</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-label">Latest</span>
+                <h1 class="hero-title">NOMINEES</h1>
+                <p class="hero-description">Vote for the goodest boys and girls on PawsomeAwards</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="filters">
+        <div class="container">
+            <div class="filter-wrapper">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all">All Categories</button>
+                    <button class="filter-btn" data-filter="cutest">Cutest</button>
+                    <button class="filter-btn" data-filter="friendliest">Friendliest</button>
+                    <button class="filter-btn" data-filter="smartest">Smartest</button>
+                    <button class="filter-btn" data-filter="talents">Best Tricks</button>
+                </div>
+                <div class="sort-group">
+                    <label for="sort">Sort by:</label>
+                    <select id="sort" class="sort-select">
+                        <option value="newest">Newest</option>
+                        <option value="votes">Most Votes</option>
+                        <option value="alphabetical">A-Z</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="nominees-grid">
+        <div class="container">
+            <div class="grid-container">
+                <!-- Card 1 -->
+                <div class="nominee-card" data-category="cutest friendliest">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Golden Retriever">
+                        <div class="card-overlay">
+                            <a href="details.html" class="card-link"><i class="fas fa-arrow-right"></i></a>
+                            <button class="btn btn-vote">Vote Now</button>
+                        </div>
+                        <div class="card-badges">
+                            <span class="badge badge-cutest">Cutest</span>
+                            <span class="badge badge-friendliest">Friendliest</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Max</h3>
+                        <p class="card-breed">Golden Retriever</p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-value">8.9</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">2,543</span>
+                                <span class="stat-label">Votes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="nominee-card" data-category="smartest talents">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Border Collie">
+                        <div class="card-overlay">
+                            <a href="details.html" class="card-link"><i class="fas fa-arrow-right"></i></a>
+                            <button class="btn btn-vote">Vote Now</button>
+                        </div>
+                        <div class="card-badges">
+                            <span class="badge badge-smartest">Smartest</span>
+                            <span class="badge badge-talents">Best Tricks</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Luna</h3>
+                        <p class="card-breed">Border Collie</p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-value">9.4</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">3,127</span>
+                                <span class="stat-label">Votes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="nominee-card" data-category="cutest">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1180&q=80" alt="Corgi">
+                        <div class="card-overlay">
+                            <a href="details.html" class="card-link"><i class="fas fa-arrow-right"></i></a>
+                            <button class="btn btn-vote">Vote Now</button>
+                        </div>
+                        <div class="card-badges">
+                            <span class="badge badge-cutest">Cutest</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Charlie</h3>
+                        <p class="card-breed">Corgi</p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-value">9.2</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">2,891</span>
+                                <span class="stat-label">Votes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="nominee-card" data-category="friendliest talents">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1611003228941-98852ba62227?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Beagle">
+                        <div class="card-overlay">
+                            <a href="details.html" class="card-link"><i class="fas fa-arrow-right"></i></a>
+                            <button class="btn btn-vote">Vote Now</button>
+                        </div>
+                        <div class="card-badges">
+                            <span class="badge badge-friendliest">Friendliest</span>
+                            <span class="badge badge-talents">Best Tricks</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Bella</h3>
+                        <p class="card-breed">Beagle</p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-value">8.7</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">2,104</span>
+                                <span class="stat-label">Votes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="nominee-card" data-category="smartest">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="German Shepherd">
+                        <div class="card-overlay">
+                            <a href="details.html" class="card-link"><i class="fas fa-arrow-right"></i></a>
+                            <button class="btn btn-vote">Vote Now</button>
+                        </div>
+                        <div class="card-badges">
+                            <span class="badge badge-smartest">Smartest</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Cooper</h3>
+                        <p class="card-breed">German Shepherd</p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-value">9.0</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">2,752</span>
+                                <span class="stat-label">Votes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 6 -->
+                <div class="nominee-card" data-category="cutest talents">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1591769225440-811ad6a2bb6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Poodle">
+                        <div class="card-overlay">
+                            <a href="details.html" class="card-link"><i class="fas fa-arrow-right"></i></a>
+                            <button class="btn btn-vote">Vote Now</button>
+                        </div>
+                        <div class="card-badges">
+                            <span class="badge badge-cutest">Cutest</span>
+                            <span class="badge badge-talents">Best Tricks</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Daisy</h3>
+                        <p class="card-breed">Poodle</p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-value">8.8</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">2,315</span>
+                                <span class="stat-label">Votes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load-more">
+                <button class="btn btn-secondary btn-large">Load More Nominees</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <a href="index.html">Pawsome<span>Awards</span></a>
+                    </div>
+                    <p>Celebrating the most amazing dogs around the world. The annual Pawsome Awards showcases talented, adorable, and extraordinary dogs in various categories.</p>
+                </div>
+                <div class="footer-nav">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Nominees</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Past Winners</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-categories">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#">Cutest</a></li>
+                        <li><a href="#">Friendliest</a></li>
+                        <li><a href="#">Smartest</a></li>
+                        <li><a href="#">Best Tricks</a></li>
+                    </ul>
+                </div>
+                <div class="footer-subscribe">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe to our newsletter for updates on nominees and winners.</p>
+                    <form class="subscribe-form">
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pawsome Awards. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

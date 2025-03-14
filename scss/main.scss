@@ -1,0 +1,1454 @@
+/* ===============================================
+   Main SCSS File for Pawsome Awards
+   This file imports all other SCSS partials
+   Created for Assignment 6: Two-Page Website with CSS Grid,
+   Flexbox, and SASS/SCSS Features
+   =============================================== */
+
+// Abstract imports
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+@import 'abstracts/placeholders';
+
+// Base imports
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/animations';
+
+// Components imports
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/navigation';
+@import 'components/badges';
+
+// Layout imports
+@import 'layout/grid';
+@import 'layout/flexbox';
+@import 'layout/header';
+@import 'layout/footer';
+
+// Pages imports
+@import 'pages/home';
+@import 'pages/details';
+
+// Utilities imports
+@import 'utilities/helpers';
+@import 'utilities/responsive';
+
+/* ===============================================
+   Abstracts: Variables
+   =============================================== */
+
+// Color variables
+$primary-color: #ff6b6b;
+$secondary-color: #4d4d4d;
+$accent-color: #ffd166;
+$text-color: #333333;
+$light-text: #ffffff;
+$dark-bg: #252525;
+$light-bg: #f9f9f9;
+$border-color: #eeeeee;
+
+// Category colors
+$cutest-color: #ff6b9c;
+$friendliest-color: #4ecdc4;
+$smartest-color: #1aeb78;
+$talents-color: #ffcd44;
+
+// Typography variables
+$font-family-primary: 'Inter', sans-serif;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+$font-size-base: 16px;
+
+// Spacing variables
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+$spacing-xxl: 5rem;
+
+// Border radius
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 16px;
+$border-radius-xl: 24px;
+$border-radius-full: 9999px;
+
+// Transition
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// Shadows
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+// Z-index layers
+$z-index-base: 1;
+$z-index-header: 100;
+$z-index-modal: 1000;
+
+// Container widths
+$container-max-width: 1200px;
+$container-padding: $spacing-lg;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// CSS Custom Properties
+:root {
+  // Using SCSS variables to set CSS custom properties
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --accent-color: #{$accent-color};
+  --text-color: #{$text-color};
+  --light-text: #{$light-text};
+  --dark-bg: #{$dark-bg};
+  --light-bg: #{$light-bg};
+  --border-color: #{$border-color};
+  
+  // Category colors as custom properties
+  --cutest-color: #{$cutest-color};
+  --friendliest-color: #{$friendliest-color};
+  --smartest-color: #{$smartest-color};
+  --talents-color: #{$talents-color};
+  
+  // Spacing custom properties
+  --spacing-xs: #{$spacing-xs};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+  --spacing-xxl: #{$spacing-xxl};
+}
+
+/* ===============================================
+   Abstracts: Functions
+   =============================================== */
+
+// Convert pixels to rem
+@function rem($pixels, $context: $font-size-base) {
+  @return ($pixels / $context) * 1rem;
+}
+
+// Darken color by percentage
+@function darken-color($color, $percentage) {
+  @return darken($color, $percentage);
+}
+
+// Lighten color by percentage
+@function lighten-color($color, $percentage) {
+  @return lighten($color, $percentage);
+}
+
+// Create color variations
+@function create-color-variation($base-color, $variation) {
+  @if $variation == 'light' {
+    @return lighten($base-color, 15%);
+  } @else if $variation == 'dark' {
+    @return darken($base-color, 15%);
+  } @else if $variation == 'transparent' {
+    @return rgba($base-color, 0.8);
+  } @else {
+    @return $base-color;
+  }
+}
+
+// Z-index function
+@function z-index($layer) {
+  @if $layer == 'header' {
+    @return $z-index-header;
+  } @else if $layer == 'modal' {
+    @return $z-index-modal;
+  } @else {
+    @return $z-index-base;
+  }
+}
+
+/* ===============================================
+   Abstracts: Mixins
+   =============================================== */
+
+// Flexbox mixin
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+// Grid mixin
+@mixin grid($columns: 1, $gap: $spacing-md) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+// Typography mixin
+@mixin typography($size, $weight: $font-weight-regular, $line-height: 1.5) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+}
+
+// Button mixin
+@mixin button-style($bg-color: $primary-color, $text-color: $light-text, $hover-color: darken($bg-color, 10%)) {
+  background-color: $bg-color;
+  color: $text-color;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $border-radius-md;
+  border: none;
+  font-weight: $font-weight-semi-bold;
+  cursor: pointer;
+  transition: background-color $transition-normal;
+  
+  &:hover, &:focus {
+    background-color: $hover-color;
+  }
+}
+
+// Media query mixins
+@mixin responsive($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+}
+
+// Card mixin
+@mixin card($padding: $spacing-md, $bg-color: white, $shadow: $shadow-md) {
+  background-color: $bg-color;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow;
+  padding: $padding;
+  transition: transform $transition-normal, box-shadow $transition-normal;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// Badge mixin
+@mixin badge($bg-color: $primary-color, $text-color: $light-text) {
+  background-color: $bg-color;
+  color: $text-color;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-full;
+  font-size: 0.75rem;
+  font-weight: $font-weight-semi-bold;
+  display: inline-block;
+}
+
+// Animation mixin
+@mixin animate($name, $duration: 0.3s, $timing: ease, $delay: 0s) {
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-timing-function: $timing;
+  animation-delay: $delay;
+  animation-fill-mode: both;
+}
+
+/* ===============================================
+   Abstracts: Placeholders
+   =============================================== */
+
+%container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+  width: 100%;
+}
+
+%section-spacing {
+  padding: $spacing-xl 0;
+  
+  @include responsive(md) {
+    padding: $spacing-xxl 0;
+  }
+}
+
+%card-hover {
+  cursor: pointer;
+  transition: transform $transition-normal, box-shadow $transition-normal;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+%heading-style {
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-md;
+}
+
+%button-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+%link-style {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: darken-color($primary-color, 15%);
+    text-decoration: underline;
+  }
+}
+
+/* ===============================================
+   Base: Reset
+   =============================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: $font-size-base;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-family-primary;
+  line-height: 1.6;
+  color: $text-color;
+  background-color: $light-bg;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  @extend %link-style;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+/* ===============================================
+   Base: Typography
+   =============================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  @extend %heading-style;
+  line-height: 1.2;
+}
+
+h1 {
+  @include typography(2.5rem, $font-weight-black);
+  margin-bottom: $spacing-lg;
+  
+  @include responsive(md) {
+    @include typography(3.5rem, $font-weight-black);
+  }
+}
+
+h2 {
+  @include typography(2rem, $font-weight-bold);
+  margin-bottom: $spacing-md;
+  
+  @include responsive(md) {
+    @include typography(2.5rem, $font-weight-bold);
+  }
+}
+
+h3 {
+  @include typography(1.5rem, $font-weight-bold);
+  margin-bottom: $spacing-sm;
+}
+
+h4 {
+  @include typography(1.25rem, $font-weight-semi-bold);
+  margin-bottom: $spacing-sm;
+}
+
+p {
+  margin-bottom: $spacing-md;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-primary {
+  color: $primary-color;
+}
+
+.text-secondary {
+  color: $secondary-color;
+}
+
+.text-accent {
+  color: $accent-color;
+}
+
+/* ===============================================
+   Base: Animations
+   =============================================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-fadeIn {
+  @include animate(fadeIn);
+}
+
+.animate-slideInUp {
+  @include animate(slideInUp);
+}
+
+.animate-pulse {
+  @include animate(pulse, 1.5s, ease-in-out, 0s);
+  animation-iteration-count: infinite;
+}
+
+/* ===============================================
+   Components: Buttons
+   =============================================== */
+
+.btn {
+  @extend %button-reset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $border-radius-md;
+  font-weight: $font-weight-semi-bold;
+  transition: all $transition-fast;
+  text-align: center;
+  
+  i {
+    margin-right: $spacing-xs;
+  }
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.btn-primary {
+  @include button-style($primary-color, $light-text);
+}
+
+.btn-secondary {
+  @include button-style($secondary-color, $light-text);
+}
+
+.btn-large {
+  padding: $spacing-md $spacing-xl;
+  font-size: 1.1rem;
+}
+
+.btn-vote {
+  @include button-style($accent-color, $dark-bg);
+  
+  &.voted {
+    background-color: lighten-color($accent-color, 20%);
+  }
+}
+
+.btn-group {
+  @include flex(row, flex-start, center);
+  gap: $spacing-sm;
+}
+
+/* ===============================================
+   Components: Cards
+   =============================================== */
+
+.nominee-card {
+  @include card;
+  overflow: hidden;
+  transition: transform $transition-normal, box-shadow $transition-normal;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  .card-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: $border-radius-md $border-radius-md 0 0;
+    aspect-ratio: 4/3;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform $transition-slow;
+    }
+    
+    .card-overlay {
+      @include flex(row, space-between, center);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba($dark-bg, 0.5);
+      opacity: 0;
+      transition: opacity $transition-normal;
+      padding: $spacing-md;
+      
+      .card-link {
+        width: 40px;
+        height: 40px;
+        background: $light-text;
+        border-radius: 50%;
+        @include flex(row, center, center);
+        color: $text-color;
+        
+        &:hover {
+          background: $primary-color;
+          color: $light-text;
+        }
+      }
+    }
+    
+    .card-badges {
+      position: absolute;
+      top: $spacing-sm;
+      left: $spacing-sm;
+      @include flex(row, flex-start, center);
+      gap: $spacing-xs;
+      z-index: 2;
+    }
+  }
+  
+  .card-content {
+    padding: $spacing-md;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    
+    .card-title {
+      margin-bottom: $spacing-xs;
+    }
+    
+    .card-breed {
+      color: $secondary-color;
+      margin-bottom: $spacing-md;
+    }
+    
+    .card-stats {
+      @include flex(row, space-between, center);
+      margin-top: auto;
+      
+      .stat {
+        text-align: center;
+        
+        .stat-value {
+          display: block;
+          font-weight: $font-weight-bold;
+          color: $primary-color;
+        }
+        
+        .stat-label {
+          font-size: 0.8rem;
+          color: $secondary-color;
+        }
+      }
+    }
+  }
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-lg;
+    
+    .card-image {
+      img {
+        transform: scale(1.05);
+      }
+    }
+  }
+  
+  &.small {
+    .card-content {
+      padding: $spacing-sm;
+      
+      .card-title {
+        font-size: 1.1rem;
+      }
+      
+      .card-breed {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+/* ===============================================
+   Components: Navigation
+   =============================================== */
+
+.main-nav {
+  .nav-list {
+    @include flex(row, center, center);
+    gap: $spacing-lg;
+    
+    li {
+      position: relative;
+      
+      a {
+        text-decoration: none;
+        color: $text-color;
+        font-weight: $font-weight-semi-bold;
+        transition: color $transition-fast;
+        padding: $spacing-xs 0;
+        position: relative;
+        
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 0%;
+          height: 2px;
+          background-color: $primary-color;
+          transition: width $transition-normal;
+        }
+        
+        &:hover, &.active {
+          color: $primary-color;
+          
+          &:after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ===============================================
+   Components: Badges
+   =============================================== */
+
+.badge {
+  @include badge;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.7rem;
+}
+
+.badge-cutest {
+  background-color: $cutest-color;
+}
+
+.badge-friendliest {
+  background-color: $friendliest-color;
+}
+
+.badge-smartest {
+  background-color: $smartest-color;
+}
+
+.badge-talents {
+  background-color: $talents-color;
+}
+
+/* ===============================================
+   Layout: Grid
+   =============================================== */
+
+.container {
+  @extend %container;
+}
+
+.grid-container {
+  @include grid(1, $spacing-lg);
+  
+  @include responsive(md) {
+    @include grid(2, $spacing-lg);
+  }
+  
+  @include responsive(lg) {
+    @include grid(3, $spacing-lg);
+  }
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+  
+  @include responsive(md) {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  @include responsive(lg) {
+    grid-template-columns: 1fr 1fr;
+    
+    .details-about {
+      grid-column: 1;
+    }
+    
+    .details-gallery {
+      grid-column: 2;
+    }
+    
+    .achievement-wrapper {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-xl;
+    }
+  }
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  gap: $spacing-md;
+  
+  .gallery-item {
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    position: relative;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform $transition-slow;
+      cursor: pointer;
+    }
+    
+    &:hover img {
+      transform: scale(1.05);
+    }
+    
+    &.large {
+      grid-column: 1 / -1;
+      grid-row: 1;
+    }
+  }
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+  
+  @include responsive(md) {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  
+  @include responsive(lg) {
+    grid-template-columns: 2fr 1fr 1fr 2fr;
+  }
+}
+
+/* ===============================================
+   Layout: Flexbox
+   =============================================== */
+
+.header-container {
+  @include flex(row, space-between, center);
+  padding: $spacing-md 0;
+}
+
+.filter-wrapper {
+  @include flex(column, flex-start, stretch);
+  gap: $spacing-md;
+  
+  @include responsive(md) {
+    @include flex(row, space-between, center);
+  }
+}
+
+.filter-group {
+  @include flex(row, flex-start, center);
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.sort-group {
+  @include flex(row, flex-end, center);
+  gap: $spacing-sm;
+}
+
+.nominees-carousel {
+  @include flex(row, flex-start, stretch);
+  gap: $spacing-lg;
+  overflow-x: auto;
+  padding-bottom: $spacing-md;
+  
+  .nominee-card {
+    min-width: 250px;
+    flex: 0 0 auto;
+  }
+}
+
+.card-stats {
+  @include flex(row, space-between, center);
+}
+
+.hero-content {
+  @include flex(column, center, center);
+  text-align: center;
+}
+
+.footer-bottom {
+  @include flex(column, center, center);
+  padding: $spacing-lg 0;
+  border-top: 1px solid $border-color;
+  text-align: center;
+  gap: $spacing-md;
+  
+  @include responsive(md) {
+    @include flex(row, space-between, center);
+    text-align: left;
+  }
+}
+
+.social-links {
+  @include flex(row, center, center);
+  gap: $spacing-md;
+  
+  a {
+    @include flex(row, center, center);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba($secondary-color, 0.1);
+    color: $secondary-color;
+    transition: all $transition-fast;
+    
+    &:hover {
+      background-color: $primary-color;
+      color: $light-text;
+    }
+  }
+}
+
+.nominee-hero {
+  .hero-details {
+    @include flex(column, flex-start, stretch);
+    gap: $spacing-lg;
+    
+    @include responsive(md) {
+      @include flex(row, space-between, flex-start);
+    }
+    
+    .nominee-image {
+      flex: 0 0 50%;
+      position: relative;
+      
+      img {
+        border-radius: $border-radius-lg;
+        width: 100%;
+      }
+      
+      .nominee-badges {
+        position: absolute;
+        top: $spacing-md;
+        left: $spacing-md;
+        @include flex(row, flex-start, center);
+        gap: $spacing-xs;
+      }
+    }
+    
+    .nominee-info {
+      flex: 0 0 45%;
+      @include flex(column, flex-start, stretch);
+      gap: $spacing-md;
+    }
+  }
+}
+
+.nominee-stats {
+  @include flex(row, flex-start, center);
+  gap: $spacing-lg;
+  
+  .stat {
+    text-align: center;
+    
+    .stat-value {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: $font-weight-bold;
+      color: $primary-color;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      color: $secondary-color;
+    }
+  }
+}
+
+.nominee-meta {
+  @include flex(column, flex-start, stretch);
+  gap: $spacing-sm;
+  
+  .meta-item {
+    @include flex(row, space-between, center);
+    padding: $spacing-sm 0;
+    border-bottom: 1px solid $border-color;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .meta-label {
+      font-weight: $font-weight-semi-bold;
+    }
+  }
+}
+
+.nominee-actions {
+  @include flex(row, flex-start, center);
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+}
+
+.achievements-list {
+  @include flex(column, flex-start, stretch);
+  gap: $spacing-md;
+  
+  .achievement-item {
+    @include flex(row, flex-start, center);
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background-color: white;
+    border-radius: $border-radius-md;
+    box-shadow: $shadow-sm;
+    
+    .achievement-icon {
+      @include flex(row, center, center);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: $accent-color;
+      color: $dark-bg;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    
+    .achievement-info {
+      h4 {
+        margin-bottom: $spacing-xs;
+      }
+      
+      p {
+        margin-bottom: 0;
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
+.ratings-chart {
+  @include flex(column, flex-start, stretch);
+  gap: $spacing-md;
+  
+  .rating-bar {
+    @include flex(row, space-between, center);
+    gap: $spacing-md;
+    
+    .rating-label {
+      flex: 0 0 100px;
+      font-weight: $font-weight-semi-bold;
+    }
+    
+    .rating-track {
+      flex: 1;
+      height: 12px;
+      background-color: rgba($secondary-color, 0.1);
+      border-radius: $border-radius-full;
+      overflow: hidden;
+      
+      .rating-fill {
+        height: 100%;
+        background-color: $primary-color;
+        border-radius: $border-radius-full;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: $spacing-sm;
+        color: $light-text;
+        font-size: 0.7rem;
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+}
+
+/* ===============================================
+   Layout: Header
+   =============================================== */
+
+.site-header {
+  background-color: white;
+  box-shadow: $shadow-sm;
+  position: sticky;
+  top: 0;
+  z-index: z-index('header');
+  
+  .logo {
+    a {
+      font-size: 1.5rem;
+      font-weight: $font-weight-bold;
+      color: $text-color;
+      text-decoration: none;
+      
+      span {
+        color: $primary-color;
+      }
+    }
+  }
+  
+  .header-actions {
+    @include flex(row, flex-end, center);
+    gap: $spacing-sm;
+  }
+}
+
+/* ===============================================
+   Layout: Footer
+   =============================================== */
+
+.site-footer {
+  background-color: white;
+  padding: $spacing-xl 0 $spacing-md;
+  margin-top: $spacing-xxl;
+  border-top: 1px solid $border-color;
+  
+  .logo {
+    margin-bottom: $spacing-md;
+  }
+  
+  h4 {
+    margin-bottom: $spacing-md;
+    color: $text-color;
+  }
+  
+  ul {
+    @include flex(column, flex-start, stretch);
+    gap: $spacing-sm;
+    
+    a {
+      color: $secondary-color;
+      text-decoration: none;
+      transition: color $transition-fast;
+      
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+  
+  .footer-about {
+    p {
+      color: $secondary-color;
+    }
+  }
+  
+  .subscribe-form {
+    @include flex(row, flex-start, stretch);
+    margin-top: $spacing-md;
+    
+    input {
+      flex: 1;
+      padding: $spacing-sm;
+      border: 1px solid $border-color;
+      border-radius: $border-radius-md 0 0 $border-radius-md;
+      outline: none;
+      
+      &:focus {
+        border-color: $primary-color;
+      }
+    }
+    
+    button {
+      border-radius: 0 $border-radius-md $border-radius-md 0;
+    }
+  }
+}
+
+/* ===============================================
+   Pages: Home
+   =============================================== */
+
+.hero {
+  @extend %section-spacing;
+  padding-bottom: $spacing-lg;
+  
+  .hero-label {
+    color: $secondary-color;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: $spacing-sm;
+    display: inline-block;
+  }
+  
+  .hero-title {
+    font-size: 4rem;
+    font-weight: $font-weight-black;
+    color: $text-color;
+    margin-bottom: $spacing-md;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      right: -15px;
+      width: 40px;
+      height: 40px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFD166"><path d="M12 0l2.41 9.13L24 11.72l-7.87 6.87L18.57 24 12 18.72 5.43 24l2.44-5.41L0 11.72l9.59-2.59L12 0z"/></svg>') no-repeat center/contain;
+    }
+    
+    @include responsive(md) {
+      font-size: 6rem;
+      
+      &:after {
+        width: 60px;
+        height: 60px;
+        right: -25px;
+      }
+    }
+  }
+  
+  .hero-description {
+    font-size: 1.2rem;
+    color: $secondary-color;
+    max-width: 600px;
+    margin: 0 auto;
+    
+    @include responsive(md) {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.filters {
+  padding: $spacing-md 0 $spacing-xl;
+  
+  .filter-btn {
+    @extend %button-reset;
+    padding: $spacing-xs $spacing-md;
+    border-radius: $border-radius-full;
+    background-color: rgba($secondary-color, 0.1);
+    color: $secondary-color;
+    font-weight: $font-weight-semi-bold;
+    transition: all $transition-fast;
+    
+    &:hover, &.active {
+      background-color: $primary-color;
+      color: $light-text;
+    }
+  }
+  
+  .sort-select {
+    padding: $spacing-xs $spacing-md;
+    border-radius: $border-radius-md;
+    border: 1px solid $border-color;
+    background-color: white;
+    cursor: pointer;
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+}
+
+.nominees-grid {
+  @extend %section-spacing;
+  
+  .load-more {
+    margin-top: $spacing-xl;
+    text-align: center;
+  }
+}
+
+/* ===============================================
+   Pages: Details
+   =============================================== */
+
+.nominee-hero {
+  @extend %section-spacing;
+  
+  .hero-breadcrumb {
+    margin-bottom: $spacing-lg;
+    color: $secondary-color;
+    
+    a {
+      color: $secondary-color;
+      text-decoration: none;
+      
+      &:hover {
+        color: $primary-color;
+      }
+    }
+    
+    span {
+      color: $primary-color;
+      font-weight: $font-weight-semi-bold;
+    }
+  }
+  
+  .nominee-title {
+    font-size: 2.5rem;
+    margin-bottom: $spacing-xs;
+    
+    .nominee-id {
+      font-size: 1rem;
+      color: $secondary-color;
+      font-weight: $font-weight-regular;
+    }
+  }
+  
+  .nominee-breed {
+    font-size: 1.2rem;
+    color: $secondary-color;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.nominee-details {
+  @extend %section-spacing;
+  
+  .section-title {
+    position: relative;
+    padding-bottom: $spacing-sm;
+    margin-bottom: $spacing-lg;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: $primary-color;
+    }
+    
+    &.centered {
+      text-align: center;
+      
+      &:after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+  
+  .subsection-title {
+    margin-top: $spacing-lg;
+  }
+  
+  .skills-list {
+    list-style: disc;
+    padding-left: $spacing-lg;
+    
+    li {
+      margin-bottom: $spacing-sm;
+    }
+  }
+}
+
+.other-nominees {
+  background-color: white;
+  padding: $spacing-xl 0;
+  
+  .section-title {
+    margin-bottom: $spacing-xl;
+  }
+}
+
+.vote-cta {
+  background-color: $dark-bg;
+  color: $light-text;
+  padding: $spacing-xl 0;
+  margin-top: $spacing-xxl;
+  
+  .cta-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    
+    h2 {
+      margin-bottom: $spacing-sm;
+    }
+    
+    p {
+      margin-bottom: $spacing-lg;
+      color: rgba($light-text, 0.8);
+    }
+  }
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($dark-bg, 0.9);
+  z-index: z-index('modal');
+  @include flex(row, center, center);
+  opacity: 0;
+  transition: opacity $transition-normal;
+  
+  .lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    
+    img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: $border-radius-md;
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: $light-text;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+  }
+}
+
+/* ===============================================
+   Utilities: Helpers
+   =============================================== */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.centered {
+  text-align: center;
+}
+
+.spaced {
+  margin: $spacing-md 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* ===============================================
+   Utilities: Responsive
+   =============================================== */
+
+.hide-sm {
+  @include responsive(sm) {
+    display: none;
+  }
+}
+
+.hide-md {
+  @include responsive(md) {
+    display: none;
+  }
+}
+
+.hide-lg {
+  @include responsive(lg) {
+    display: none;
+  }
+}
+
+.show-sm {
+  display: none;
+  
+  @include responsive(sm) {
+    display: block;
+  }
+}
+
+.show-md {
+  display: none;
+  
+  @include responsive(md) {
+    display: block;
+  }
+}
+
+.show-lg {
+  display: none;
+  
+  @include responsive(lg) {
+    display: block;
+  }
+}
